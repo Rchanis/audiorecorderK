@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+        }
+
+        .recording-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .audio-player {
+            width: 70%;
+        }
+
+        .button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+    <script src="canciones.js"></script>
+</head>
+
+<body>
+    <h1>Nombre del Álbum</h1>
+    <h2>Nombre de la Canción - Artista</h2>
+
+    <div>
+        Contador:<span id="songCount">0</span>
+        <button class="button" onclick="playOriginal()">Reproducir Canción Original</button>
+        <a class="button" href="{% url 'record' %}">Ir a la Página de Grabación</a>
+    </div>
+
+    <h2>Grabaciones</h2>
+    <div id="recordingList"></div>
+
+    <script>
+        // Simulación de datos para la canción actual
+        const currentSong = { title: 'Canción 1', artist: 'Artista 1' };
+
+        // Simulación de grabaciones con fechas
+        const recordings = [
+            { date: '2024-01-27', audioUrl: 'URL_DE_AUDIO_1' },
+            { date: '2024-01-28', audioUrl: 'URL_DE_AUDIO_2' },
+            // Agrega más grabaciones según sea necesario
+        ];
+
+        // Simulación de contador de canciones
+        let songCounter = recordings.length;
+
+        // Actualiza el contador de canciones en la página
+        function updateSongCount() {
+            document.getElementById('songCount').textContent = songCounter;
+        }
+
+        // Función para ver grabaciones por días (debes implementarla según tus necesidades)
+        function viewRecordingsByDays() {
+            // Implementa la lógica para mostrar grabaciones organizadas por días
+            alert('Mostrar grabaciones por días');
+        }
+
+        // Función para reproducir la canción original (debes implementarla según tus necesidades)
+        function playOriginal() {
+            alert(`Reproducir la canción original: ${currentSong.title} - ${currentSong.artist}`);
+        }
+
+        // Función para ir a la página de grabación (debes implementarla según tus necesidades)
+        function goToRecordingPage() {
+            // Implementa la lógica para redirigir a la página de grabación
+            alert('Ir a la página de grabación');
+        }
+
+        // Al cargar la página, actualiza el contador de canciones y muestra las grabaciones
+        updateSongCount();
+        displayRecordings();
+
+        // Función para mostrar las grabaciones en la lista
+        function displayRecordings() {
+            const recordingListContainer = document.getElementById('recordingList');
+
+            recordings.forEach((recording) => {
+                const recordingItem = document.createElement('div');
+                recordingItem.className = 'recording-item';
+
+                const audioPlayer = document.createElement('audio');
+                audioPlayer.className = 'audio-player';
+                audioPlayer.controls = true;
+                audioPlayer.src = recording.audioUrl;
+
+                const dateElement = document.createElement('div');
+                dateElement.textContent = recording.date;
+
+                recordingItem.appendChild(audioPlayer);
+                recordingItem.appendChild(dateElement);
+
+                recordingListContainer.appendChild(recordingItem);
+            });
+        }
+    </script>
+
+</body>
+
+</html>

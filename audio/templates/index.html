@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Álbum Favorito</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .song-anchor {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Mi Álbum Favorito</h1>
+    <h2>Nombre del Álbum</h2>
+
+    <div id="songList"></div>
+    <script defer>
+        const albumSongs = [
+            { title: 'Canción 1', artist: 'Artista 1' },
+            { title: 'Canción 2', artist: 'Artista 2' },
+            { title: 'Canción 3', artist: 'Artista 3' },
+            // Agrega más canciones según sea necesario
+        ];
+
+        const songListContainer = document.getElementById('songList');
+
+        albumSongs.forEach((song, index) => {
+            const link = document.createElement('a');
+            link.className = 'song-anchor';
+            link.textContent = `${song.title} - ${song.artist}`;
+            link.href = "{% url 'songs' %}"
+            link.addEventListener('click', () => playSong(index));
+
+            songListContainer.appendChild(link);
+        });
+
+        function playSong(index) {
+            // Aquí puedes implementar la lógica para reproducir la canción seleccionada
+            alert(`Reproducir: ${albumSongs[index].title} - ${albumSongs[index].artist}`);
+        }
+    </script>
+</body>
+
+</html>
