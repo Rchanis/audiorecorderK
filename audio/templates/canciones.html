@@ -50,7 +50,17 @@
     </div>
 
     <h2>Grabaciones</h2>
-    <div id="recordingList"></div>
+    <div id="recordingList">
+        {% for audio_file in audio_files %}
+        <div class="recording-item">
+
+            <audio controls class="audio-player">
+                <source src="{{ audio_file }}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        {% endfor %}
+    </div>
 
     <script>
         // Simulación de datos para la canción actual
